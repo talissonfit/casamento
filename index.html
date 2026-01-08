@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Destino Escrito</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0f0c29;
+            background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* Container Principal com Brilho */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 40px;
+            border-radius: 40px;
+            text-align: center;
+            width: 400px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #ff9a9e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p { color: #ccc; font-size: 0.9rem; margin-bottom: 30px; letter-spacing: 1px; }
+
+        .input-box {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: white;
+            outline: none;
+            transition: 0.4s;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            border-color: #ff9a9e;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(255, 154, 158, 0.3);
+        }
+
+        /* Botão Mágico */
+        button {
+            width: 100%;
+            padding: 18px;
+            border-radius: 15px;
+            border: none;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            color: #4a00e0;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(255, 154, 158, 0.4);
+        }
+
+        #resultado {
+            margin-top: 30px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            min-height: 40px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-card">
+        <h1>O Destino</h1>
+        <p>Preencha nosso oráculo</p>
+        
+        <div class="input-box">
+            <input type="text" id="gisele" placeholder="Profissão da Gisele">
+        </div>
+
+        <div class="input-box">
+            <input type="text" id="talisson" placeholder="Profissão do Talisson">
+        </div>
+
+        <button onclick="revelar()">Revelar Futuro</button>
+        
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        function revelar() {
+            const g = document.getElementById('gisele').value.toLowerCase().trim();
+            const t = document.getElementById('talisson').value.toLowerCase().trim();
+            const res = document.getElementById('resultado');
+
+            if (g === 'enfermeira' && t === 'bancario') {
+                res.style.color = "#ff9a9e";
+                res.innerHTML = "Sim! Iremos nos casar! ❤️💍";
+                
+                // Chuva de corações profissional
+                var duration = 5 * 1000;
+                var end = Date.now() + duration;
+
+                (function frame() {
+                  confetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff9a9e', '#ff4757']
+                  });
+                  confetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff9a9e', '#ff4757']
+                  });
+
+                  if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                  }
+                }());
+
+            } else {
+                res.style.color = "#888";
+                res.innerHTML = "O universo está se alinhando... ✨";
+            }
+        }
+    </script>
+</body>
+</html>
